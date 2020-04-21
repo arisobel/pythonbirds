@@ -13,3 +13,7 @@ if __name__ == "__main__":
     print(id(joao))
     for filho in pedro.filhos:
         print(filho.nome)
+    joao.sobrenome = "Silva"
+    del pedro.filhos
+    print(joao.__dict__)
+    print(pedro.__dict__)
