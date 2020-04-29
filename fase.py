@@ -2,7 +2,6 @@
 from itertools import chain
 from atores import ATIVO
 
-
 VITORIA = 'VITORIA'
 DERROTA = 'DERROTA'
 EM_ANDAMENTO = 'EM_ANDAMENTO'
@@ -35,7 +34,6 @@ class Fase():
         self._passaros = []
         self._porcos = []
         self._obstaculos = []
-
 
     def adicionar_obstaculo(self, *obstaculos):
         """
@@ -74,7 +72,6 @@ class Fase():
         :return:
         """
 
-
         if not self._possui_porco_ativo():
             return VITORIA
         elif self._possui_passaro_ativo():
@@ -93,8 +90,10 @@ class Fase():
         :param angulo: ângulo de lançamento
         :param tempo: Tempo de lançamento
         """
-        pass
-
+        for passaro in self._passaros:
+            if not passaro.foi_lancado():
+                passaro.lancar(angulo=angulo, tempo=tempo)
+                break
 
     def calcular_pontos(self, tempo):
         """
@@ -105,7 +104,7 @@ class Fase():
         :param tempo: tempo para o qual devem ser calculados os pontos
         :return: objeto do tipo Ponto
         """
-        pontos=[self._transformar_em_ponto(a) for a in self._passaros+self._obstaculos+self._porcos]
+        pontos = [self._transformar_em_ponto(a) for a in self._passaros + self._obstaculos + self._porcos]
 
         return pontos
 
@@ -116,12 +115,10 @@ class Fase():
         for porco in self._porcos:
             if porco.status == ATIVO:
                 return True
-            return False
+        return False
 
     def _possui_passaro_ativo(self):
         for passaro in self._passaros:
             if passaro.status == ATIVO:
                 return True
-            return False
-
-
+        return False
