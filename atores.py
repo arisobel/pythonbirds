@@ -53,12 +53,11 @@ class Ator():
         :return:
         """
         if self.status == ATIVO and outro_ator.status == ATIVO:
-            if self.x - outro_ator.x <=1:
-                self.status = DESTRUIDO
-                outro_ator.status = DESTRUIDO
-            elif self.y - outro_ator.y <=1:
-                self.status = DESTRUIDO
-                outro_ator.status = DESTRUIDO
+            delta_x = abs(self.x - outro_ator.x)
+            delta_y = abs(self.y - outro_ator.y)
+            if (delta_x <= intervalo) and (delta_y <= intervalo):
+                outro_ator.status = self.status = DESTRUIDO
+
 
 
 class Obstaculo(Ator):
